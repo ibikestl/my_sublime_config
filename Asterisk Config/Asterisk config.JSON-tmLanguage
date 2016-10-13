@@ -1,0 +1,232 @@
+// [PackageDev] target_format: plist, ext: tmLanguage
+{
+	"name": "Asterisk config",
+	"scopeName": "source.asterisk.config",
+	"fileTypes": ["conf"],
+	"uuid": "01514276-8d8f-49e6-a8f3-08642d7f8b33",
+	"foldingStartMarker": "\\[.*\\])(\\((!)?.*?\\))?",
+	"foldingStopMarker": "?=\\[",
+
+	"repository": {
+		"path_value": {
+			"name": "constant.other",
+			"match": "(/[\\w-]+)+(\\.[\\w-]+)?"
+		},
+		"net_address_value": {
+			"name": "constant.other",
+			"match": "(\\w+://)?((\\w+:)?\\w+@)?([\\w-]+\\.)+[a-zA-Z-]+(:\\d+)?"
+		},
+		"ip_netmask_value": {
+			"name": "constant.other",
+			"match": "\\b((?:\\d{1,3}\\.){3}\\d{1,3})(?:/((?:\\d{1,3}\\.){3}\\d{1,3}))?\\b"
+		},
+		"numerics": {
+			"name": "constant.other",
+			"match": "\\b[0-9]*?\\b"
+		},
+		"boolean_value": {
+			"name": "constant.numeric",
+			"match": "\\b(true|false|yes|no|all|none)\\b"
+		},
+		"ast_variable": {
+			"name": "constant.numeric",
+			"match": "\\$\\{[a-zA-Z0-9_\\-]+(:[0-9])*\\}"
+		},
+		"ast_string": {
+				"name": "string.unquoted",
+				"match": "[a-zA-Z0-9_-]+"
+		},
+		"ast_keyword": {
+				"name": "keyword.operator",
+				"match": "(=|>|<|!=|-|\\+|&|\\||,|\"|\\?|:)"
+		},
+		"ast_expression": {
+			"name": "meta.variable.parameter",
+			"begin": "(\\$\\[)",
+			"beginCaptures": {
+				"1": { "name": "variable" }
+			},
+			"end": "(\\])",
+			"endCaptures": {
+				"1": { "name": "variable" }
+			},
+			"patterns": [
+				{ "include": "#ast_expression" },
+				{ "include": "#ast_variable" },
+				{ "include": "#ast_keyword" },
+				{ "include": "#ast_function" },
+				{ "include": "#numerics" }
+			]
+		},
+		"ast_function": {
+			"name": "meta.variable.parameter",
+			"begin": "(\\$\\{)\\b(AES_DECRYPT|AES_ENCRYPT|AMI_CLIENT|ARRAY|AST_CONFIG|AST_SORCERY|AUDIOHOOK_INHERIT|BASE64_DECODE|BASE64_ENCODE|BLACKLIST|CALLCOMPLETION|CALLERID|CALLERPRES|CDR_PROP|CDR|CHANNELS|CHANNEL|CHECKSIPDOMAIN|CONFBRIDGE_INFO|CONFBRIDGE|CONNECTEDLINE|CSV_QUOTE|CUT|DB_DELETE|DB_EXISTS|DB_KEYS|DB|DEC|DEVICE_STATE|DIALGROUP|DIALPLAN_EXISTS|ENUMLOOKUP|ENUMQUERY|ENUMRESULT|ENV|EVAL|EXCEPTION|EXISTS|EXTENSION_STATE|FAXOPT|FEATUREMAP|FEATURE|FIELDNUM|FIELDQTY|FILE_COUNT_LINE|FILE_FORMAT|FILE|FILTER|FRAME_TRACE|GLOBAL|GROUP_COUNT|GROUP_LIST|GROUP_MATCH_COUNT|GROUP|HANGUPCAUSE_KEYS|HANGUPCAUSE|HASHKEYS|HASH|HINT|ICONV|IFMODULE|IFTIME|IF|IMPORT|INC|ISNULL|JITTERBUFFER|KEYPADHASH|LEN|LISTFILTER|LOCAL_PEEK|LOCAL|LOCK|MAILBOX_EXISTS|MASTER_CHANNEL|MATH|MD5|MESSAGE_DATA|MESSAGE|MINIVMACCOUNT|MINIVMCOUNTER|MIXMONITOR|MUTEAUDIO|ODBC_ANTIGF|ODBC_FETCH|ODBC_ngcore_get_out_|ODBC_ngcore_get_prox|ODBC_PRESENCE|ODBC_SQL|ODBC|PASSTHRU|PERIODIC_HOOK|PITCH_SHIFT|POP|PRESENCE_STATE|PUSH|QUOTE|RAND|REALTIME_DESTROY|REALTIME_FIELD|REALTIME_HASH|REALTIME_STORE|REALTIME|REDIRECTING|REGEX|REPLACE|SCCPCHANNEL|SCCPDEVICE|SCCPLINE|SET|SHA1|SHARED|SHELL|SHIFT|SIP_HEADER|SIPCHANINFO|SIPPEER|SORT|SPEECH_ENGINE|SPEECH_GRAMMAR|SPEECH_RESULTS_TYPE|SPEECH_SCORE|SPEECH_TEXT|SPEECH|SPRINTF|SQL_ESC|SRVQUERY|SRVRESULT|STACK_PEEK|STAT|STRFTIME|STRPTIME|STRREPLACE|SYSINFO|TALK_DETECT|TESTTIME|TIMEOUT|TOLOWER|TOUPPER|TRYLOCK|TXTCIDNAME|UNLOCK|UNSHIFT|URIDECODE|URIENCODE|VALID_EXTEN|VERSION|VM_INFO|VMCOUNT|VOLUME)\\b(\\()?",
+			"beginCaptures": {
+				"1": { "name": "meta.function-call" },
+				"2": { "name": "meta.function-call" },
+				"3": { "name": "meta.function-call" }
+			},
+			"end": "(\\))([a-zA-Z0-9:]*)(\\})",
+			"endCaptures": {
+				"1": { "name": "meta.function-call" },
+				"2": { "name": "string" },
+				"3": { "name": "meta.function-call" }
+			},
+			"patterns": [
+				{ "include": "#ast_variable" },
+				{ "include": "#ast_function" },
+				{ "include": "#ast_expression" },
+				{ "include": "#numerics" },
+				{ "include": "#ast_keyword" },
+				{ "include": "#boolean_value" },
+				{ "include": "#ast_string" }
+			]
+		},
+		"ast_applications": {
+			"name": "meta.internal.function",
+			"begin": "(Zapateller|While|WaitUntil|WaitMusicOnHold|WaitForSilence|WaitForRing|WaitForNoise|WaitExten|Wait|VoiceMailPlayMsg|VoiceMailMain|VoiceMail|Verbose|VMSayName|VMAuthenticate|UserEvent|UnpauseMonitor|TrySystem|TryExec|Transfer|TestServer|TestClient|System|StopPlayTones|StopMusicOnHold|StopMonitor|StopMixMonitor|Stasis|StartMusicOnHold|StackPop|SpeechUnloadGrammar|SpeechStart|SpeechProcessingSound|SpeechLoadGrammar|SpeechDestroy|SpeechDeactivateGrammar|SpeechCreate|SpeechBackground|SpeechActivateGrammar|SoftHangup|SetSCCPCodec|SetMusicOnHold|SetMessage|SetCalledParty|SetAMAFlags|Set|SendURL|SendText|SendImage|SendFAX|SendDTMF|SayUnixTime|SayPhonetic|SayNumber|SayDigits|SayAlphaCase|SayAlpha|SMS|SIPRemoveHeader|SIPDtmfMode|SIPAddHeader|SCCPSetMessage|SCCPSetCodec|SCCPSetCalledParty|Ringing|Return|RetryDial|ResetCDR|Record|ReceiveFAX|ReadExten|Read|RaiseException|QueueLog|Queue|Progress|Proceeding|PrivacyManager|Playback|PlayTones|PickupChan|Pickup|PauseMonitor|Page|Originate|ODBC_Rollback|ODBC_Commit|ODBCFinish|NoOp|Noop|NoCDR|NBScat|MusicOnHold|Morsecode|Monitor|MixMonitor|MinivmRecord|MinivmNotify|MinivmMWI|MinivmGreet|MinivmDelete|MinivmAccMess|Milliwatt|MessageSend|MailboxExists|MacroIf|MacroExit|MacroExclusive|Macro|MYSQL|MSet|MP3Player|Log|Incomplete|ImportVar|ICES|HangupCauseClear|Hangup|GotoIfTime|GotoIf|Goto|GosubIf|Gosub|GetCPEID|ForkCDR|ExternalIVR|ExtenSpy|ExitWhile|ExecIfTime|ExecIf|Exec|EndWhile|Echo|EAGI|DumpChan|Directory|Dictate|Dial|DeadAGI|DateTime|DISA|DBdeltree|DBdel|DAHDIScan|ControlPlayback|ContinueWhile|Congestion|ConfBridge|ClearHash|ChannelRedirect|ChangeMonitor|ChanSpy|ChanIsAvail|CallCompletionRequest|CallCompletionCancel|CELGenUserEvent|Busy|BridgeWait|Bridge|BackgroundDetect|BackGround|Authenticate|Answer|AGI|ADSIProg)\\(?",
+			"beginCaptures": {
+				"1": { "name": "meta.function-call" }
+			},
+			"end": "\\)?\\s*$",
+			"patterns": [
+				{ "include": "#ast_expression" },
+				{ "include": "#ast_variable" },
+				{ "include": "#ast_function" },
+				{ "include": "#ip_netmask_value" },
+				{
+					"name": "string",
+					"match": "\\?\\w+:\\w+"
+				},
+				{ "include": "#numerics" },
+				{ "include": "#ast_keyword" },
+				{ "include": "#boolean_value" },
+				{ "include": "#ast_string" }
+			]
+		},
+		"comment": {
+			"name": "meta.comment.line",
+			"begin": "(;.*)",
+			"beginCaptures": {
+				"1": { "name": "comment.line" }
+			},
+			"end": "$"
+		}
+	},
+
+	"patterns": [
+		{ "include": "#comment" },
+		{
+			"name": "meta.section",
+			"begin": "(\\[(macro-)?.*\\])(?:\\((!)?\\s*,?(?:\\s*(\\w+)\\s*,?)*\\))?",
+			"beginCaptures": {
+				"1": { "name": "constant.language" },
+				"2": { "name": "constant.language" },
+				"3": { "name": "storage.modifier" },
+				"4": { "name": "entity.other-inherited-class" }
+			},
+			"end": "(?=\\[)",
+			"patterns": [
+				{ "include": "#comment" },
+				{
+					"name": "meta.hint",
+					"begin": "^\\s*(exten)\\s*(=>)\\s*([a-zA-Z0-9_\\-\\*]+),(hint),(.*)",
+					"beginCaptures": {
+						"1": { "name": "keyword.other" },
+						"2": { "name": "keyword.operator" },
+						"3": { "name": "variable.parameter" },
+						"4": { "name": "support.function" },
+						"5": { "name": "constant.language" }
+					},
+					"patterns": [
+						{ "include": "#ast_applications" }
+					],
+					"end": "$"
+				},
+				{
+					"name": "meta.extension",
+					"begin": "^\\s*(exten)\\s*(=>)\\s*(a|h|i|o|s|t|T|e|failed|fax|talk|receiver|[a-zA-Z0-9\\*\\-#]+|[0-9\\*]+|_[a-zA-Z0-9XZN!\\.\\*\\-]+),(\\d+|n)(\\(.*?\\))?,",
+					"beginCaptures": {
+						"1": { "name": "keyword.other" },
+						"2": { "name": "keyword.operator" },
+						"3": { "name": "variable.parameter" },
+						"4": { "name": "support.function" },
+						"5": { "name": "variable.parameter" }
+					},
+					"patterns": [
+						{ "include": "#ast_applications" }
+					],
+					"end": "$"
+				},
+				{
+					"name": "meta.extension",
+					"begin": "^\\s*(same)\\s*(=>)\\s*(\\d+|n)(\\(.*?\\))?,",
+					"beginCaptures": {
+						"1": { "name": "keyword.other" },
+						"2": { "name": "keyword.operator" },
+						"3": { "name": "support.function" },
+						"4": { "name": "variable.parameter" }
+					},
+					"patterns": [
+						{ "include": "#ast_applications" }
+					],
+					"end": "$"
+				},
+				{
+					"name": "meta.expression",
+					"begin": "^\\s*([a-zA-Z0-9_-]+)\\s*(=)(?!>)",
+					"beginCaptures": {
+						"1": { "name": "variable.parameter" },
+						"2": { "name": "keyword.operator" }
+					},
+					"end": "$",
+					"patterns": [
+						{ "include": "#path_value" },
+						{ "include": "#ip_netmask_value" },
+						{ "include": "#net_address_value" },
+						{ "include": "#boolean_value" },
+						{ "include": "#numerics" },
+						{
+							"name": "string",
+							"match": ".*"
+						},
+						{ "include": "#comment" }
+					]
+				},
+				{
+					"name": "meta.command",
+					"begin": "^\\s*(include|[a-zA-Z_-]+)\\s*(=>)\\s*([a-zA-Z0-9\\/_-]+)",
+					"beginCaptures": {
+						"1": { "name": "keyword.control" },
+						"2": { "name": "keyword.operator" },
+						"3": { "name": "string" }
+					},
+					"end": "$",
+					"patterns": [
+						{ "include": "#path_value" },
+						{ "include": "#ip_netmask_value" },
+						{ "include": "#net_address_value" },
+						{ "include": "#boolean_value" },
+						{ "include": "#comment" }
+					]
+				},
+				{
+					"name": "meta.command",
+					"begin": "^\\s*(\\#include)\\s*([a-zA-Z0-9_\\*\\.\\/]+)",
+					"beginCaptures": {
+						"1": { "name": "keyword.control" },
+						"2": { "name": "string" }
+					},
+					"end": "$",
+					"patterns": [
+						{ "include": "#path_value" },
+						{ "include": "#ip_netmask_value" },
+						{ "include": "#net_address_value" },
+						{ "include": "#boolean_value" },
+						{ "include": "#comment" }
+					]
+				}
+			]
+		}
+	]
+}

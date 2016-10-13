@@ -1,0 +1,1 @@
+{"description": "Logstash DSL Syntax Highlighting for Sublime Text", "url": "https://github.com/nir0s/sublime-logstash-syntax-highlighter", "platforms": ["*"], "version": "0.0.1", "sublime_text": "*", "dependencies": []}

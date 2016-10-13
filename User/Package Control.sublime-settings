@@ -1,0 +1,36 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Asterisk Config",
+		"BracketHighlighter",
+		"Emmet",
+		"Emmet Css Snippets",
+		"Find Function Definition",
+		"GitGutter",
+		"Highlight",
+		"JavaScript Snippets",
+		"JavaScriptNext - ES6 Syntax",
+		"jQuery",
+		"jQuery Snippets pack",
+		"JsFormat",
+		"JSLint",
+		"JSONLint",
+		"Logstash Syntax Highlighting",
+		"Mediawiker",
+		"Neon Color Scheme",
+		"Package Control",
+		"Pretty JSON",
+		"Puppet",
+		"Puppet Syntax checking",
+		"Pylinter",
+		"RPM Spec Syntax",
+		"sublimelint",
+		"TagWrapper",
+		"Text Pastry",
+		"Toggle Symbol to String"
+	]
+}

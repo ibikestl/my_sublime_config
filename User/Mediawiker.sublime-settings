@@ -1,0 +1,33 @@
+{
+	"mediawiki_site":
+	{
+		"English wikipedia":
+		{
+			"domain": "",
+			"host": "en.wikipedia.org",
+			"pagepath": "/wiki/",
+			"password": "",
+			"path": "/w/",
+			"username": ""
+		},
+		"Mediawiki":
+		{
+			"domain": "",
+			"host": "www.mediawiki.org",
+			"pagepath": "/wiki/",
+			"password": "",
+			"path": "/w/",
+			"username": ""
+		},
+		"Russian wikipedia":
+		{
+			"domain": "",
+			"host": "ru.wikipedia.org",
+			"pagepath": "/wiki/",
+			"password": "",
+			"path": "/w/",
+			"username": ""
+		}
+	},
+	"mediawiki_site_active": "Exegy Wiki"
+}

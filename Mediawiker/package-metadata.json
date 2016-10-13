@@ -1,0 +1,1 @@
+{"description": "Mediawiker is a plugin for Sublime Text editor that adds possibility to use it as Wiki Editor on Mediawiki based sites like Wikipedia and many other.", "url": "https://github.com/tosher/Mediawiker", "platforms": ["*"], "version": "3.1.13", "sublime_text": "*", "dependencies": []}

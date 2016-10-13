@@ -1,0 +1,11 @@
+{
+	"color_scheme": "Packages/Neon Color Scheme/Neon.tmTheme",
+	"font_size": 10.0,
+	"ignored_packages":
+	[
+		"Puppet Syntax checking",
+		"Pylinter",
+		"TagWrapper",
+		"Vintage"
+	]
+}
